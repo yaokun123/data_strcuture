@@ -20,12 +20,36 @@ public class _206_反转链表 {
 		}
 	}
 
+	/**
+	 * 方法一：递归实现
+	 * @param head
+	 * @return
+	 */
 	public ListNode reverseList(ListNode head) {
 		if (head == null || head.next == null) return head;
 		
-		ListNode newHeadListNode = reverseList(head.next);
+		ListNode newHead = reverseList(head.next);
 		head.next.next = head;
 		head.next = null;
-		return newHeadListNode;s
+		return newHead;
+    }
+	
+	/**
+	 * 方法二：迭代实现
+	 * @param head
+	 * @return
+	 */
+	public ListNode reverseList2(ListNode head) {
+		if (head == null || head.next == null) return head;
+		
+		ListNode newHead = null;
+		while (head != null) {
+			ListNode tmp = head.next;
+			head.next = newHead;
+			newHead = head;
+			head = tmp;
+			
+		}
+		return newHead;
     }
 }
