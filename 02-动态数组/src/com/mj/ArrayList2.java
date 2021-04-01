@@ -46,11 +46,11 @@ public class ArrayList2<E> {
 	public int indexOf(E element) {//查看元素位置
 		//注意处理null的情况
 		if (element == null) {
-			for (int i=0;i<size-1;i++) {
+			for (int i=0;i<size;i++) {
 				if (elements[i] == null) return i;
 			}
 		}else {
-			for (int i=0;i<size-1;i++) {
+			for (int i=0;i<size;i++) {
 				//泛型比较不能直接使用等号（判断内存地址是不是相等）
 				//可以重写equals方法
 				//if (elements[i] == element) return i;
