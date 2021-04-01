@@ -81,6 +81,7 @@ public class LinkList<E> {
 		return old;
 	}
 	public E remove(int index) {
+		if (index < 0 || index >= size) throw new IndexOutOfBoundsException("下标异常");
 		Node<E> node = first;
 		if (index == 0) {
 			first = first.next;
