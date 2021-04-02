@@ -31,7 +31,6 @@ public class _203_移除链表元素 {
 					preNode = current;
 					current = current.next;
 				}
-				
 			}	
 		}
 		return head;
