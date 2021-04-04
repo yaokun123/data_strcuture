@@ -1,5 +1,7 @@
 package com.mj;
 
+import java.rmi.Remote;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -80,6 +82,36 @@ public class Main {
 		System.out.println(list5);
 		list5.remove(list5.size()-1);
 		System.out.println(list5);
+		
+		
+		System.out.println("===========双向循环链表解决约瑟夫问题===========");
+		CirclrLinkList<Object> list6 = new CirclrLinkList<Object>();
+		list6.add(1);
+		list6.add(2);
+		list6.add(3);
+		list6.add(4);
+		list6.add(5);
+		list6.add(6);
+		list6.add(7);
+		list6.add(8);
+		int i = 0;
+		int j = 1;
+		while (!list6.isEmpaty()) {
+			//System.out.println(i + " " + j);
+			if((j) % 3 == 0) {
+				System.out.println(list6.remove(i));
+				//System.out.println(delIndex);
+				//i = 0;
+			}else {
+				i++;
+			}
+			
+			if (i == list6.size()) {
+				i = 0;
+			}
+			j++;
+			
+		}
 	}
 
 }
