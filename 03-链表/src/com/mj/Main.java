@@ -32,6 +32,39 @@ public class Main {
 		
 		list2.remove(1);
 		System.out.println(list2);
+		
+		
+		System.out.println("===========双向链表============");
+		LinkList3<Object> list3 = new LinkList3<>();
+		list3.add(11);
+		list3.add(22);
+		list3.add(33);
+		list3.add(44);
+		list3.add(0,55);
+		list3.add(2,66);
+		
+		
+		System.out.println(list3);
+		list3.remove(list3.size()-1);
+		System.out.println(list3);
+		
+		
+		
+		System.out.println("===========单向循环链表============");
+		SingleCircleLinkList<Object> list4 = new SingleCircleLinkList<>();
+		
+		
+		list4.add(11);
+		list4.add(22);
+		list4.add(33);
+		list4.add(44);
+		list4.add(0,55);
+		list4.add(2,66);
+		
+		
+		System.out.println(list4);
+		list4.remove(list4.size()-1);
+		System.out.println(list4);
 	}
 
 }
