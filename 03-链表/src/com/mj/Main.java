@@ -65,6 +65,21 @@ public class Main {
 		System.out.println(list4);
 		list4.remove(list4.size()-1);
 		System.out.println(list4);
+		
+		
+		System.out.println("===========双向循环链表============");
+		CirclrLinkList<Object> list5 = new CirclrLinkList<Object>();
+		list5.add(11);
+		list5.add(22);
+		list5.add(33);
+		list5.add(44);
+		list5.add(0,55);
+		list5.add(2,66);
+		
+		
+		System.out.println(list5);
+		list5.remove(list5.size()-1);
+		System.out.println(list5);
 	}
 
 }
