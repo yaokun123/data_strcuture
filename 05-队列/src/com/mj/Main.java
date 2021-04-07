@@ -15,6 +15,21 @@ public class Main {
 		while (!queue.isEmpty()) {
 			System.out.println(queue.deQueue());
 		}
+		
+		System.out.println("==========双向队列===========");
+		Deque<Integer> deque = new Deque<>();
+		
+		deque.enQueueFront(11);
+		deque.enQueueFront(22);
+		deque.enQueueRear(33);
+		deque.enQueueRear(44);
+		
+		while (!deque.isEmpty()) {
+			System.out.println(deque.deQueueFront());
+			
+		}
+		
+		
 	}
 
 }
