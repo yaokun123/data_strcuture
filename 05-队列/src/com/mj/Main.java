@@ -41,7 +41,7 @@ public class Main {
 		}
 		
 		
-		for(int i = 15;i<20;i++) {
+		for(int i = 15;i<23;i++) {
 			queue2.enQueue(i);
 		}
 		
