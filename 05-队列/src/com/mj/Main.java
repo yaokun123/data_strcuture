@@ -30,6 +30,27 @@ public class Main {
 		}
 		
 		
+		System.out.println("==========环形队列===========");
+		CircleQueue<Object> queue2 = new CircleQueue<>();
+		for(int i = 0;i<10;i++) {
+			queue2.enQueue(i);
+		}
+		
+		for(int i = 0;i<5;i++) {
+			queue2.deQueue();
+		}
+		
+		
+		for(int i = 15;i<20;i++) {
+			queue2.enQueue(i);
+		}
+		
+		//System.out.println(queue);
+		while (!queue2.isEmpty()) {
+			System.out.println(queue2.deQueue());
+			
+		}
+		
 	}
 
 }
