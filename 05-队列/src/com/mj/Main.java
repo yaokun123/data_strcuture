@@ -51,6 +51,27 @@ public class Main {
 			
 		}
 		
+		
+		System.out.println("==========循环双端队列===========");
+		CircleDeque<Integer> cDeque = new CircleDeque<>();
+		for(int i = 0;i<10;i++) {
+			cDeque.enQueueFront(i+1);
+			cDeque.enQueueRear(i + 100);
+		}
+		
+		for(int i = 0;i<3;i++) {
+			cDeque.deQueueFront();
+			cDeque.deQueueRear();
+		}
+		
+		cDeque.enQueueFront(11);
+		cDeque.enQueueFront(22);
+		
+		while (!cDeque.isEmpty()) {
+			System.out.println(cDeque.deQueueFront());
+			
+		}
+		
 	}
 
 }
