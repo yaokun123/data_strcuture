@@ -1,5 +1,7 @@
 package com.mj;
 
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * 二叉搜索树
@@ -67,6 +69,7 @@ public class BinarySearchTree<E> {//第二种方法
 			}else if(cmp < 0) {
 				node = node.left;
 			}else {
+				node.element = element;//替换元素
 				return;
 			}
 		}
@@ -118,5 +121,78 @@ public class BinarySearchTree<E> {//第二种方法
 		
 		return ((Comparable<E>)e1).compareTo(e2);
 	}
+	
+	
+	/**
+	 * 二叉树前序遍历
+	 */
+	public void preorderTraversal() {
+		preorderTraversal(root);
+	}
+	public void preorderTraversal(Node<E> node) {
+		if (node == null) return;
+		System.out.println(node.element);
+		
+		preorderTraversal(node.left);
+		preorderTraversal(node.right);
+	}
+	
+	/**
+	 * 二叉树后序遍历
+	 */
+	public void postorderTraversal() {
+		preorderTraversal(root);
+	}
+	public void postorderTraversal(Node<E> node) {
+		if (node == null) return;
+		
+		preorderTraversal(node.left);
+		preorderTraversal(node.right);
+		System.out.println(node.element);
+	}
+	
+	
+	/**
+	 * 二叉树中序遍历
+	 */
+	public void inorderTraversal() {
+		preorderTraversal(root);
+	}
+	public void inorderTraversal(Node<E> node) {
+		if (node == null) return;
+		
+		preorderTraversal(node.left);
+		System.out.println(node.element);
+		preorderTraversal(node.right);
+	}
+	
+	/**
+	 * 二叉树层序遍历
+	 */
+	public void levelOrderTraversal() {
+		if (root == null) return;
+		
+		//使用队列
+		Queue<Node<E>> queue = new LinkedList<>();
+		
+		//根节点入队
+		queue.offer(root);
+		
+		while (!queue.isEmpty()) {
+			Node<E> currentNode = queue.poll();
+			System.out.println(currentNode.element);
+			
+			
+			if (currentNode.left != null) {
+				queue.offer(currentNode.left);
+			}
+			
+			if(currentNode.right != null) {
+				queue.offer(currentNode.right);
+			}
+			
+		}
+	}
+	
 
 }
