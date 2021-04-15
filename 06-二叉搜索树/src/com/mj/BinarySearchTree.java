@@ -280,6 +280,9 @@ public class BinarySearchTree<E> {//第二种方法
 			}else {
 				//后面遍历的节点都应该是叶子节点
 				leaf = true;
+				if(currentNode.left != null) {
+					queue.offer(currentNode.left);
+				}
 			}
 		}
 		
