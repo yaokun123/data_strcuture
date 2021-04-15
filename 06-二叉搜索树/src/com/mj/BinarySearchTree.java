@@ -194,5 +194,97 @@ public class BinarySearchTree<E> {//第二种方法
 		}
 	}
 	
+	
+	//计算二叉树的高度：第一种方法（递归）
+	public int height() {
+		return height(root);
+	}
+	public int height(Node<E> node) {
+		if (node == null) return 0;
+		return 1 + Math.max(height(node.left), height(node.right));
+	}
+	
+	
+	//计算二叉树的高度：第一种方法（层序遍历）
+	public int height2() {
+		if (root == null) return 0;
+		
+		//使用队列
+		Queue<Node<E>> queue = new LinkedList<>();
+		
+		//根节点入队
+		queue.offer(root);
+		
+		int height = 0;
+		int levelSize = 1;
+		
+		while (!queue.isEmpty()) {
+			Node<E> currentNode = queue.poll();
+			levelSize--;
+			
+			if (currentNode.left != null) {
+				queue.offer(currentNode.left);
+			}
+			if(currentNode.right != null) {
+				queue.offer(currentNode.right);
+			}
+			
+			if(levelSize == 0) {//即将要访问下一层
+				levelSize = queue.size();
+				height++;
+			}
+			
+		}
+		
+		return height;
+	}
+	
+	
+	
+	//判断一棵树是否为完全二叉树（层序遍历）
+	public boolean isComplete() {
+		if (root == null) return false;
+		
+		/**
+		 * 思路：
+		 * 如果node.left != null && node.right != null ，将node.left、node.right按顺序入队
+		 * 
+		 * 如果node.left == null && node.right != null ，返回false
+		 * 
+		 * 如果node.left != null && node.right == null 
+		 * 或者node.left == null && node.right == null
+		 * 那么后面的遍历的节点都为叶子节点，才是完全二叉树
+		 */
+		
+		//使用队列
+		Queue<Node<E>> queue = new LinkedList<>();
+		
+		//根节点入队
+		queue.offer(root);
+		
+		
+		boolean leaf = false;
+		while (!queue.isEmpty()) {
+			Node<E> currentNode = queue.poll();
+			if(leaf) {
+				if(currentNode.left != null || currentNode.right != null) {
+					return false;
+				}
+			}
+			
+			if (currentNode.left != null && currentNode.right != null) {
+				queue.offer(currentNode.left);
+				queue.offer(currentNode.right);
+			}else if(currentNode.left == null && currentNode.right != null) {
+				return false;
+			}else {
+				//后面遍历的节点都应该是叶子节点
+				leaf = true;
+			}
+		}
+		
+		return true;
+	}
+	
 
 }
