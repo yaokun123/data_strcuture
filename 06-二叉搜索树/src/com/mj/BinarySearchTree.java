@@ -289,5 +289,53 @@ public class BinarySearchTree<E> {//第二种方法
 		return true;
 	}
 	
+	
+	//二叉树的前驱节点
+	public Node<E> predecessor(Node<E> node){
+		if (node == null) return null;
+		
+		if(node.left != null) {
+			//找左节点的最右
+			Node<E> tmpNode = node.left;
+			while (node.right != null) {
+				tmpNode = node.right;
+			}
+			return tmpNode;
+		}else {
+			//判断父节点是否为空
+			while (node.parent != null && node.parent.left == node) {
+				node = node.parent;
+			}
+			
+			//node.parent == null
+			//node = node.parent.right
+			return node.parent;
+		}
+	}
+	
+	
+	//二叉树的后继节点
+	public Node<E> successor(Node<E> node){
+		if (node == null) return null;
+		
+		if(node.right != null) {
+			//找左节点的最右
+			Node<E> tmpNode = node.right;
+			while (node.left != null) {
+				tmpNode = node.left;
+			}
+			return tmpNode;
+		}else {
+			//判断父节点是否为空
+			while (node.parent != null && node.parent.right == node) {
+				node = node.parent;
+			}
+			
+			//node.parent == null
+			//node = node.parent.right
+			return node.parent;
+		}
+	}
+	
 
 }
