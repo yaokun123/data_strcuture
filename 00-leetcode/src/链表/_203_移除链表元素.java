@@ -18,7 +18,7 @@ public class _203_移除链表元素 {
 	public ListNode removeElements(ListNode head, int val) {
 		ListNode current = head;
 		ListNode preNode = head;
-		while(current != null && current.next != null) {
+		while(current != null) {
 			if(head.val == val) {//如果是头节点要单独处理
 				head = head.next;
 				current = head;
