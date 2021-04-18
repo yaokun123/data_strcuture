@@ -5,6 +5,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+
+/**
+ * https://leetcode-cn.com/problems/binary-tree-level-order-traversal/
+ * @author yaokun
+ *
+ */
 public class _102_二叉树的层序遍历 {
 	public List<List<Integer>> levelOrder(TreeNode root) {
 		List<List<Integer>> parentList = new ArrayList<>();

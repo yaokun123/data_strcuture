@@ -3,6 +3,11 @@ package 二叉树;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * https://leetcode-cn.com/problems/binary-tree-postorder-traversal/
+ * @author yaokun
+ *
+ */
 public class _145_二叉树的后序遍历 {
 	
 	//1、递归实现
