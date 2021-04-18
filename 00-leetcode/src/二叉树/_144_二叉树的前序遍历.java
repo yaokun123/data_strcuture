@@ -6,7 +6,7 @@ import java.util.List;
 public class _144_二叉树的前序遍历 {
 	
 	
-	//递归实现
+	//1、递归实现
 	public List<Integer> preorderTraversal(TreeNode root) {
 		
 		
@@ -24,4 +24,8 @@ public class _144_二叉树的前序遍历 {
 		preorder(node.right,l);
 		
 	}
+	
+	
+	
+	//2、遍历实现
 }

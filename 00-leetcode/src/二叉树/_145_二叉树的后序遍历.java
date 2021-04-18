@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class _145_二叉树的后序遍历 {
+	
+	//1、递归实现
 	public List<Integer> postorderTraversal(TreeNode root) {
 		List<Integer> res = new ArrayList<Integer>();
 		
@@ -19,4 +21,7 @@ public class _145_二叉树的后序遍历 {
 		l.add(node.val);
 		
 	}
+	
+	
+	//2、遍历实现
 }

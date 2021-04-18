@@ -5,6 +5,8 @@ import java.util.List;
 
 public class _94_二叉树的中序遍历 {
 	
+	
+	//1、递归实现
 	public List<Integer> inorderTraversal(TreeNode root) {
 		List<Integer> res = new ArrayList<Integer>();
 		
@@ -20,4 +22,7 @@ public class _94_二叉树的中序遍历 {
 		inorder(node.right,l);
 		
 	}
+	
+	
+	//2、遍历实现
 }
