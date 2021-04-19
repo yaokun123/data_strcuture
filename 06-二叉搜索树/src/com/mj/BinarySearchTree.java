@@ -44,7 +44,8 @@ public class BinarySearchTree<E> {//第二种方法
 	}
 	
 	public void clear() {
-		
+		root = null;
+		size = 0;
 	}
 	
 	public void add(E element) {
@@ -158,7 +159,7 @@ public class BinarySearchTree<E> {//第二种方法
 	}
 	
 	public boolean contains(E element) {
-		return false;
+		return node(element) != null;
 	}
 	
 	private void elementNotNullCheck(E element) {
