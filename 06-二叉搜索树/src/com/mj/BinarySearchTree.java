@@ -84,8 +84,77 @@ public class BinarySearchTree<E> {//第二种方法
 		size++;
 	}
 	
+	
+	//删除元素
 	public void remove(E element) {
+		//1、删除度为0的节点（叶子节点）直接删除
+		//node == node.parent.left	->  node.parent.left = null
+		//node == node.parent.right ->	node.parent.right = null
+		//node.parent == null		->	root = null
 		
+		//2、删除度为1的节点，用子节点替代原节点的位置（注意区分左右和根）
+		//child是node.left 或者 child是node.right
+		//如果node是左节点		->	child.parent = node.parent && node.parent.left = child
+		//如果node是右节点		->	child.parent = node.parent && node.parent.right = child
+		//如果node是根节点		->	child.parent = null && root = child
+		
+		
+		//3、删除度为2的节点，先用前驱或者后继节点的值覆盖原节点的值，删除然后相应的前驱/后继
+		remove(node(element));
+		
+	}
+	
+	//删除节点
+	private void remove(Node<E> node) {
+		if (node == null) return;
+		size--;
+		
+		if(node.left != null && node.right != null) {//1、度为2
+			//找到后继
+			Node<E> succNode = successor(node);
+			
+			//使用后继节点的值覆盖度为2的节点的值
+			node.element = succNode.element;
+			
+			//删除后继节点（度为2的节点的前驱或者后继的度只可能为0或1）
+			node = succNode;
+		}
+		
+		
+		//删除node节点
+		Node<E> replacementNode = node.left != null ? node.left : node.right;
+		
+		if(replacementNode != null) {//node是度为1的
+			replacementNode.parent = node.parent;
+			
+			if(node.parent == null) {//node是根
+				root = replacementNode;
+			}else if(node == node.parent.left) {//node是父节点的左节点
+				node.parent.left = replacementNode;
+			}else {//node是父节点的有右节点
+				node.parent.right = replacementNode;
+			}
+		}else {//node度为0
+			if(node.parent == null) {//node是root
+				root = null;
+			}
+			
+			if(node == node.parent.left) node.parent.left = null;
+			if(node == node.parent.right) node.parent.right = null;
+		}
+	}
+	
+	//根据元素找到节点
+	private Node<E> node(E element){
+		Node<E> node = root;
+		while (node != null) {
+			int cmp = compare(element, node.element);
+			if (cmp > 0) node = node.right;
+			if (cmp < 0) node = node.left;
+			if (cmp == 0) return node;
+			
+		}
+		return null;
 	}
 	
 	public boolean contains(E element) {
