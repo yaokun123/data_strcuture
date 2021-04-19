@@ -76,7 +76,9 @@ public class LinkList2<E> {
 		size++;
 	}
 	public void clear() {//清除所有元素
-		first = null;
+		//first = null;
+		//使用虚拟头节点，清除的时候就要将虚拟头节点的next指向null
+		first.next = null;
 		size = 0;
 	}
 	public E get(int index){//返回index位置对应的元素

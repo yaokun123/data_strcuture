@@ -35,6 +35,10 @@ public class Main {
 		list2.remove(1);
 		System.out.println(list2);
 		
+		list2.clear();
+		list2.add("test");
+		System.out.println(list2);
+		
 		
 		System.out.println("===========双向链表============");
 		LinkList3<Object> list3 = new LinkList3<>();
