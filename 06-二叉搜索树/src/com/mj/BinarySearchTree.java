@@ -48,16 +48,21 @@ public class BinarySearchTree<E> {//第二种方法
 		size = 0;
 	}
 	
+	/**
+	 * 二叉搜索树-添加
+	 * @param element
+	 */
 	public void add(E element) {
 		elementNotNullCheck(element);
 		
-		if(size == 0 || root == null) {//添加根节点
+		//根节点要特殊处理
+		if(size == 0 || root == null) {
 			root = new Node<>(element,null);
 			size++;
 			return;
 		}
 		
-		//子节点
+		//其他子节点
 		Node<E> node = root;
 		Node<E> parent = null;	
 		int cmp = 0;
@@ -86,7 +91,10 @@ public class BinarySearchTree<E> {//第二种方法
 	}
 	
 	
-	//删除元素
+	/**
+	 * 二叉搜索树-删除元素
+	 * @param element
+	 */
 	public void remove(E element) {
 		//1、删除度为0的节点（叶子节点）直接删除
 		//node == node.parent.left	->  node.parent.left = null
@@ -105,20 +113,21 @@ public class BinarySearchTree<E> {//第二种方法
 		
 	}
 	
-	//删除节点
+	/**
+	 * 二叉搜索树-删除节点
+	 * @param node
+	 */
 	private void remove(Node<E> node) {
 		if (node == null) return;
 		size--;
 		
 		if(node.left != null && node.right != null) {//1、度为2
-			//找到后继
+			
+			//找到后继---> 度为2的节点肯定会有前驱和后继
 			Node<E> succNode = successor(node);
 			
-			//使用后继节点的值覆盖度为2的节点的值
-			node.element = succNode.element;
-			
-			//删除后继节点（度为2的节点的前驱或者后继的度只可能为0或1）
-			node = succNode;
+			node.element = succNode.element;//使用后继节点的值覆盖度为2的节点的值
+			node = succNode;//删除后继节点（度为2的节点的前驱或者后继的度只可能为0或1）
 		}
 		
 		
@@ -138,6 +147,7 @@ public class BinarySearchTree<E> {//第二种方法
 		}else {//node度为0
 			if(node.parent == null) {//node是root
 				root = null;
+				return;
 			}
 			
 			if(node == node.parent.left) node.parent.left = null;
@@ -145,7 +155,11 @@ public class BinarySearchTree<E> {//第二种方法
 		}
 	}
 	
-	//根据元素找到节点
+	/**
+	 * 二叉搜索树-根据元素找到节点
+	 * @param element
+	 * @return
+	 */
 	private Node<E> node(E element){
 		Node<E> node = root;
 		while (node != null) {
@@ -194,7 +208,7 @@ public class BinarySearchTree<E> {//第二种方法
 	
 	
 	/**
-	 * 二叉树前序遍历
+	 * 二叉树-前序遍历
 	 */
 	public void preorderTraversal() {
 		preorderTraversal(root);
@@ -208,16 +222,16 @@ public class BinarySearchTree<E> {//第二种方法
 	}
 	
 	/**
-	 * 二叉树后序遍历
+	 * 二叉树-后序遍历
 	 */
 	public void postorderTraversal() {
-		preorderTraversal(root);
+		postorderTraversal(root);
 	}
 	public void postorderTraversal(Node<E> node) {
 		if (node == null) return;
 		
-		preorderTraversal(node.left);
-		preorderTraversal(node.right);
+		postorderTraversal(node.left);
+		postorderTraversal(node.right);
 		System.out.println(node.element);
 	}
 	
@@ -226,14 +240,14 @@ public class BinarySearchTree<E> {//第二种方法
 	 * 二叉树中序遍历
 	 */
 	public void inorderTraversal() {
-		preorderTraversal(root);
+		inorderTraversal(root);
 	}
 	public void inorderTraversal(Node<E> node) {
 		if (node == null) return;
 		
-		preorderTraversal(node.left);
+		inorderTraversal(node.left);
 		System.out.println(node.element);
-		preorderTraversal(node.right);
+		inorderTraversal(node.right);
 	}
 	
 	/**
@@ -244,14 +258,11 @@ public class BinarySearchTree<E> {//第二种方法
 		
 		//使用队列
 		Queue<Node<E>> queue = new LinkedList<>();
-		
-		//根节点入队
-		queue.offer(root);
+		queue.offer(root);//根节点入队
 		
 		while (!queue.isEmpty()) {
 			Node<E> currentNode = queue.poll();
 			System.out.println(currentNode.element);
-			
 			
 			if (currentNode.left != null) {
 				queue.offer(currentNode.left);
@@ -265,7 +276,10 @@ public class BinarySearchTree<E> {//第二种方法
 	}
 	
 	
-	//计算二叉树的高度：第一种方法（递归）
+	/**
+	 * 二叉树-计算高度（递归）
+	 * @return
+	 */
 	public int height() {
 		return height(root);
 	}
@@ -275,15 +289,16 @@ public class BinarySearchTree<E> {//第二种方法
 	}
 	
 	
-	//计算二叉树的高度：第一种方法（层序遍历）
+	/**
+	 * 二叉树-计算高度（层序遍历）
+	 * @return
+	 */
 	public int height2() {
 		if (root == null) return 0;
 		
 		//使用队列
 		Queue<Node<E>> queue = new LinkedList<>();
-		
-		//根节点入队
-		queue.offer(root);
+		queue.offer(root);//根节点入队
 		
 		int height = 0;
 		int levelSize = 1;
@@ -303,15 +318,15 @@ public class BinarySearchTree<E> {//第二种方法
 				levelSize = queue.size();
 				height++;
 			}
-			
 		}
-		
 		return height;
 	}
 	
 	
-	
-	//判断一棵树是否为完全二叉树（层序遍历）
+	/**
+	 * 判断一棵树是否为完全二叉树（层序遍历）
+	 * @return
+	 */
 	public boolean isComplete() {
 		if (root == null) return false;
 		
@@ -328,12 +343,9 @@ public class BinarySearchTree<E> {//第二种方法
 		
 		//使用队列
 		Queue<Node<E>> queue = new LinkedList<>();
+		queue.offer(root);//根节点入队
+		boolean leaf = false;//标识是否从该节点之后都要是叶子节点
 		
-		//根节点入队
-		queue.offer(root);
-		
-		
-		boolean leaf = false;
 		while (!queue.isEmpty()) {
 			Node<E> currentNode = queue.poll();
 			if(leaf) {
@@ -342,30 +354,32 @@ public class BinarySearchTree<E> {//第二种方法
 				}
 			}
 			
-			if (currentNode.left != null && currentNode.right != null) {
+			if (currentNode.left != null && currentNode.right != null) {//左右节点都不为空
 				queue.offer(currentNode.left);
 				queue.offer(currentNode.right);
-			}else if(currentNode.left == null && currentNode.right != null) {
+			}else if(currentNode.left == null && currentNode.right != null) {//左节点为空、右节点不为空
 				return false;
-			}else {
-				//后面遍历的节点都应该是叶子节点
+			}else {//左右节点都为空 + 左节点不为空右节点为空（后面遍历的节点都应该是叶子节点）
 				leaf = true;
-				if(currentNode.left != null) {
+				if(currentNode.left != null) {//如果是左节点不为空右节点为空的情况左节点还要正常入队
 					queue.offer(currentNode.left);
 				}
 			}
 		}
-		
 		return true;
 	}
 	
 	
-	//二叉树的前驱节点
+	/**
+	 * 二叉树-前驱节点
+	 * 按照中序遍历得到节点的前一个节点
+	 * @param node
+	 * @return
+	 */
 	public Node<E> predecessor(Node<E> node){
 		if (node == null) return null;
 		
-		if(node.left != null) {
-			//找左节点的最右
+		if(node.left != null) {//如果左节点存在，就从左节点开始找，找到最右节点
 			Node<E> tmpNode = node.left;
 			while (node.right != null) {
 				tmpNode = node.right;
@@ -377,19 +391,22 @@ public class BinarySearchTree<E> {//第二种方法
 				node = node.parent;
 			}
 			
-			//node.parent == null
-			//node = node.parent.right
+			//node.parent == null || node = node.parent.right
 			return node.parent;
 		}
 	}
 	
 	
-	//二叉树的后继节点
+	/**
+	 * 二叉树-后继节点
+	 * 按照中序遍历得到节点的后一个节点
+	 * @param node
+	 * @return
+	 */
 	public Node<E> successor(Node<E> node){
 		if (node == null) return null;
 		
-		if(node.right != null) {
-			//找左节点的最右
+		if(node.right != null) {//如果右节点存在，就从右节点开始找，找到最左节点
 			Node<E> tmpNode = node.right;
 			while (node.left != null) {
 				tmpNode = node.left;
@@ -401,8 +418,7 @@ public class BinarySearchTree<E> {//第二种方法
 				node = node.parent;
 			}
 			
-			//node.parent == null
-			//node = node.parent.right
+			//node.parent == null || node = node.parent.right
 			return node.parent;
 		}
 	}
