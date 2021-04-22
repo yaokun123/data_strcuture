@@ -19,6 +19,13 @@ public class BinaryTree<E> {
 			this.element = element;
 			this.parent = parent;
 		}
+		
+		public boolean isLeftChild() {
+			return parent != null && this == parent.left;
+		}
+		public boolean isRightChild() {
+			return parent != null && this == parent.right;
+		}
 	}
 	
 	
@@ -250,6 +257,10 @@ public class BinaryTree<E> {
 			//node.parent == null || node = node.parent.right
 			return node.parent;
 		}
+	}
+	
+	protected Node<E> createNode(E element, Node<E> parent) {
+		return new Node<>(element, parent);
 	}
 	
 }
