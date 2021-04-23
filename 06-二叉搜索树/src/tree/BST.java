@@ -158,6 +158,15 @@ public class BST<E> extends BinaryTree<E> {
 			if(node == node.parent.left) node.parent.left = null;
 			if(node == node.parent.right) node.parent.right = null;
 		}
+		
+		afterRemove(node);
+	}
+	/**
+	 * 删除node之后的调整
+	 * @param node
+	 */
+	protected void afterRemove(Node<E> node) {
+		
 	}
 	
 	/**

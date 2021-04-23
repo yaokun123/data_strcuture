@@ -250,4 +250,24 @@ public class AVL<E> extends BST<E> {
 	}
 	
 	
+	/**
+	 * 删除导致的失衡：
+	 * 只可能会导致父节点失衡
+	 */
+	
+	@Override
+	protected void afterRemove(Node<E> node) {
+		while ((node = node.parent) != null) {
+			//判断node是否平衡
+			if(isBalanced(node)) {
+				//如果是平衡的，更新高度
+				updateHeight(node);
+			}else {
+				//如果不是平衡的，恢复平衡
+				rebalance(node);
+			}
+		}
+	}
+	
+	
 }
