@@ -93,17 +93,63 @@ public class AVL<E> extends BST<E> {
 		
 		if(parent.isLeftChild()) {//L
 			if(node.isLeftChild()) {//LL
-				
+				rotateRight(grand);
 			}else {//LR
-				
+				rotateLeft(parent);
+				rotateRight(grand);
 			}
 		}else {//R
 			if(node.isLeftChild()) {//RL
-				
+				rotateRight(parent);
+				rotateLeft(grand);
 			}else {//RR
-				
+				rotateLeft(grand);
 			}
 		}
+	}
+	
+	/**
+	 * 左旋
+	 * @param node
+	 */
+	private void rotateLeft(Node<E> node) {
+		//先指向p
+		Node<E> tmpNode = node.right;
+		
+		node.right = node.right.left;
+		if(node.right != null) {//修改父节点
+			node.right.parent = node;
+		}
+		
+		tmpNode.left = node;
+		
+		
+		if(node.isLeftChild()) {
+			node.parent.left = tmpNode;
+		}else {
+			node.parent.right = tmpNode;
+		}
+		
+		//修改父节点
+		tmpNode.parent = node.parent;
+		node.parent = tmpNode;
+		
+		
+		//更新高度
+		if(node.right != null) {
+			AVLNode<E> tNode = (AVLNode<E>)node.right;
+			tNode.updateHeight();
+		}
+		((AVLNode<E>)node).updateHeight();
+		((AVLNode<E>)node.parent).updateHeight();
+	}
+	
+	/**
+	 * 右旋
+	 * @param node
+	 */
+	private void rotateRight(Node<E> node) {
+		
 	}
 	
 	
