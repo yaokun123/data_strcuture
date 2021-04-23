@@ -108,48 +108,75 @@ public class AVL<E> extends BST<E> {
 		}
 	}
 	
+	
 	/**
 	 * 左旋
-	 * @param node
+	 * @param grand
 	 */
-	private void rotateLeft(Node<E> node) {
-		//先指向p
-		Node<E> tmpNode = node.right;
+	private void rotateLeft(Node<E> grand) {
+		Node<E> parent = grand.right;
+		Node<E> child = parent.left;
 		
-		node.right = node.right.left;
-		if(node.right != null) {//修改父节点
-			node.right.parent = node;
+		grand.right = child;
+		parent.left = grand;
+		
+		parent.parent = grand.parent;//修改p的父节点
+		
+		//让parent成为子树的根节点
+		if(grand.isLeftChild()) {
+			grand.parent.left = parent;
+		}else if(grand.isRightChild()){
+			grand.parent.right = parent;
+		}else {//grand是根节点
+			root = parent;
 		}
 		
-		tmpNode.left = node;
-		
-		
-		if(node.isLeftChild()) {
-			node.parent.left = tmpNode;
-		}else {
-			node.parent.right = tmpNode;
+		//修改child的parent
+		if(child != null) {
+			child.parent = grand;
 		}
 		
-		//修改父节点
-		tmpNode.parent = node.parent;
-		node.parent = tmpNode;
-		
+		//修改grand的parent
+		grand.parent = parent;
 		
 		//更新高度
-		if(node.right != null) {
-			AVLNode<E> tNode = (AVLNode<E>)node.right;
-			tNode.updateHeight();
-		}
-		((AVLNode<E>)node).updateHeight();
-		((AVLNode<E>)node.parent).updateHeight();
+		updateHeight(grand);
+		updateHeight(parent);
 	}
 	
 	/**
 	 * 右旋
 	 * @param node
 	 */
-	private void rotateRight(Node<E> node) {
+	private void rotateRight(Node<E> grand) {
+		Node<E> parent = grand.left;
+		Node<E> child = parent.right;
 		
+		grand.left = child;
+		parent.right = grand;
+		
+		//修改parent的父节点
+		parent.parent = grand.parent;
+		
+		//让parent成为子树的根节点
+		if(grand.isLeftChild()) {
+			grand.parent.left = parent;
+		}else if (grand.isRightChild()) {
+			grand.parent.right = parent;
+		}else {
+			root = parent;
+		}
+		
+		//更新child的父节点
+		if(child != null) {
+			child.parent = grand;
+		}
+		//更新grand的父节点
+		grand.parent = parent;
+		
+		//更新高度
+		updateHeight(grand);
+		updateHeight(parent);
 	}
 	
 	
