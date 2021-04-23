@@ -252,7 +252,7 @@ public class AVL<E> extends BST<E> {
 	
 	/**
 	 * 删除导致的失衡：
-	 * 只可能会导致父节点失衡
+	 * 只可能会导致父节点 或祖先节点 失衡
 	 */
 	
 	@Override
