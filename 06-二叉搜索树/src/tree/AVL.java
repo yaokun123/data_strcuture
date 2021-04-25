@@ -256,7 +256,7 @@ public class AVL<E> extends BST<E> {
 	 */
 	
 	@Override
-	protected void afterRemove(Node<E> node) {
+	protected void afterRemove(Node<E> node,Node<E> replacementNode) {
 		while ((node = node.parent) != null) {
 			//判断node是否平衡
 			if(isBalanced(node)) {
