@@ -25,6 +25,11 @@ public class Main {
 		
 		LinkList2<Object> list2 = new LinkList2<>();
 		list2.add(1);
+		System.out.println("判断元素是否存在：" + list2.indexOf(null));
+		list2.add(null);
+		System.out.println("判断元素是否存在：" + list2.indexOf(null));
+		
+		
 		list2.add("test1");
 		list2.add(121);
 		list2.add(1111);

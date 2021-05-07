@@ -38,7 +38,10 @@ public class LinkList2<E> {
 		return indexOf(element) != ELEMENT_NOT_FOUND;
 	}
 	public int indexOf(E element) {//查看元素位置
-		Node<E> currentNode = first;
+		//注意这里first指向了虚拟头节点，所以遍历应该从first.next开始
+		Node<E> currentNode = first.next;
+		
+		
 		//注意处理null的情况
 		if (element == null) {
 			for (int i=0;i<size;i++) {
