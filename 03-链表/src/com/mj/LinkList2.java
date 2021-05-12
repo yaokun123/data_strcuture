@@ -38,7 +38,10 @@ public class LinkList2<E> {
 		return indexOf(element) != ELEMENT_NOT_FOUND;
 	}
 	public int indexOf(E element) {//查看元素位置
-		Node<E> currentNode = first;
+		//注意这里first指向了虚拟头节点，所以遍历应该从first.next开始
+		Node<E> currentNode = first.next;
+		
+		
 		//注意处理null的情况
 		if (element == null) {
 			for (int i=0;i<size;i++) {
@@ -69,12 +72,22 @@ public class LinkList2<E> {
 //			preNode.next = new Node<>(element, preNode.next);
 //		}
 		
-		//使用虚拟头节点，这里就不需要淡出判断是不是第一个了
+		//使用虚拟头节点，这里就不需要单独判断是不是第一个了
 		Node<E> preNode = index == 0 ? first : node(index - 1);//上一个节点 
 		preNode.next = new Node<>(element, preNode.next);
 		
 		size++;
 	}
+	
+	private Node<E> node(int index){//根据下标获取节点
+		if (index < 0 || index >= size) throw new IndexOutOfBoundsException("下标异常");
+		Node<E> currentNode = first.next;//first代表虚拟头节点，这里第一个元素就是first.next
+		for (int i = 0; i<index; i++) {
+			currentNode = currentNode.next;
+		}
+		return currentNode;
+	}
+	
 	public void clear() {//清除所有元素
 		//first = null;
 		//使用虚拟头节点，清除的时候就要将虚拟头节点的next指向null
@@ -107,14 +120,6 @@ public class LinkList2<E> {
 		
 		size--;
 		return node.element;
-	}
-	private Node<E> node(int index){//根据下标获取节点
-		if (index < 0 || index >= size) throw new IndexOutOfBoundsException("下标异常");
-		Node<E> currentNode = first.next;//first代表虚拟头节点，这里第一个元素就是first.next
-		for (int i = 0; i<index; i++) {
-			currentNode = currentNode.next;
-		}
-		return currentNode;
 	}
 	
 	@Override
