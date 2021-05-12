@@ -151,6 +151,15 @@ public class RBT<E> extends BST<E> {
 		}
 		
 		//3、删除的是黑色叶子节点
+		Node<E> parent = node.parent;
+		
+		//根节点特殊处理
+		if(parent == null) return;
+		
+		
+		//判断被删除的节点是左还是右
+		boolean left = parent.left == null;
+		Node<E> sibling = left ? parent.right : parent.left;
 	}
 	
 	/**

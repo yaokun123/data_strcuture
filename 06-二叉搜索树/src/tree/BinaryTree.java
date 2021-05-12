@@ -2,6 +2,7 @@ package tree;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 //二叉树
 public class BinaryTree<E> {
@@ -53,7 +54,7 @@ public class BinaryTree<E> {
 	
 	
 	/**
-	 * 二叉树-前序遍历
+	 * 二叉树-前序遍历（递归实现）
 	 */
 	public void preorderTraversal() {
 		preorderTraversal(root);
@@ -64,6 +65,33 @@ public class BinaryTree<E> {
 		
 		preorderTraversal(node.left);
 		preorderTraversal(node.right);
+	}
+	
+	/**
+	 * 二叉树-前序遍历（循环实现）使用栈
+	 */
+	public void preorderTraversal2() {
+		if (root == null) return;
+		
+		Node<E> node = root;
+		Stack<Node<E>> stack = new Stack<>();
+		
+		while (true) {
+			if(node != null) {
+				System.out.println(node.element);
+				//右子节点入栈
+				if(node.right != null) {
+					stack.push(node.right);
+				}
+				//向左走
+				node = node.left;
+			}else if(stack.isEmpty()) {
+				return;
+			}else {
+				node = stack.pop();
+			}
+			
+		}
 	}
 	
 	/**
@@ -82,6 +110,36 @@ public class BinaryTree<E> {
 	
 	
 	/**
+	 * 二叉树-后序遍历（循环实现）使用栈
+	 */
+	public void postorderTraversal2() {
+		if (root == null) return;
+		
+		//记录上一次弹出访问的节点
+		Node<E> prev = null;
+		
+		Stack<Node<E>> stack = new Stack<>();
+		stack.push(root);
+		
+		while (!stack.isEmpty()) {
+			Node<E> top = stack.peek();
+			if((top.right == null && top.left == null) || (prev != null && prev.parent == top)) {
+				prev = stack.pop();
+				System.out.println(prev.element);
+			}else {
+				if(top.right != null) {
+					stack.push(top.right);
+				}
+				if(top.left != null) {
+					stack.push(top.left);
+				}
+			}
+			
+		}
+	}
+	
+	
+	/**
 	 * 二叉树中序遍历
 	 */
 	public void inorderTraversal() {
@@ -94,6 +152,34 @@ public class BinaryTree<E> {
 		System.out.println(node.element);
 		inorderTraversal(node.right);
 	}
+	
+	/**
+	 * 二叉树-中序遍历（循环实现）使用栈
+	 */
+	public void inorderTraversal2() {
+		if (root == null) return;
+		
+		Node<E> node = root;
+		Stack<Node<E>> stack = new Stack<>();
+		
+		while (true) {
+			if (node != null) {
+				stack.push(node);
+				node = node.left;
+			}else if(stack.isEmpty()) {
+				return;
+			}else {
+				node = stack.pop();
+				System.out.println(node.element);
+				
+				if(node.right != null) {
+					node = node.right;
+				}
+			}
+		}
+		
+	}
+	
 	
 	/**
 	 * 二叉树层序遍历
