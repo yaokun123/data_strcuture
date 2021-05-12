@@ -95,6 +95,30 @@ public class BinaryTree<E> {
 	}
 	
 	/**
+	 * 二叉树-前序遍历（循环实现）使用栈
+	 */
+	public void preorderTraversal3() {
+		if (root == null) return;
+		Stack<Node<E>> stack = new Stack<>();
+		stack.push(root);
+		
+		while (!stack.isEmpty()) {
+			Node<E> node = stack.pop();
+			
+			System.err.println(node.element);
+			
+			if(node.right != null) {
+				stack.push(node.right);
+			}
+			
+			if(node.left != null) {
+				stack.push(node.left);
+			}
+		}
+	}
+	
+	
+	/**
 	 * 二叉树-后序遍历
 	 */
 	public void postorderTraversal() {
